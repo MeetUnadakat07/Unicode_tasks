@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>College management App</title>
+</head>
+<body>
+    <header>
+        <h1>College Management App</h1>
+        <button class="add-student-btn"><i class="fa-solid fa-plus"></i> Add Student</button>
+    </header>
+    <!-- Create a list of all students in the api -->
+    <div class="container">
+        <div class="search-box-wrapper">
+            <input type="text" name="search-box" id="search-box" placeholder="Search..">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        </div>
+        <div class="table-container">
+            <table id="student-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>College</th>
+                        <th>CGPA</th>
+                        <th>Phone</th>
+                        <th>Batch</th>
+                        <th>Year</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="student-body">
+                    <!-- Here we will enter the student data  -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- Add student functionality  -->
+     <div id="add-student-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Add New Student</h2>
+            <form id="add-student-form">
+                <input type="text" name="studentName" placeholder="Student Name" required>
+                <input type="text" name="college" placeholder="College" required>
+                <input type="number" step="0.1" name="cgpa" placeholder="CGPA" required>
+                <input type="text" name="phone" placeholder="Phone" required>
+                <input type="text" name="sapid" placeholder="SapId" required>
+                <input type="text" name="batch" placeholder="Batch" required>
+                <input type="text" name="year" placeholder="Year" required>
+                <input type="text" name="address" placeholder="Address" required>
+
+                <!-- Submit and cancel buttons for student details  -->
+                <button type="submit">Add Student</button>
+                <button type="button" id="close-modal">Cancel</button>
+            </form>
+        </div>
+     </div>
+     <!-- Update the database  -->
+      <div id="edit-student-modal" class="modal hidden">
+  <div class="modal-content">
+    <h2>Edit Student</h2>
+    <form id="edit-student-form">
+      <input type="text" name="studentName" placeholder="Student Name" required>
+      <input type="text" name="college" placeholder="College" required>
+      <input type="number" step="0.1" name="cgpa" placeholder="CGPA" required>
+      <input type="text" name="phone" placeholder="Phone" required>
+      <input type="text" name="batch" placeholder="Batch" required>
+      <input type="text" name="year" placeholder="Year" required>
+      <input type="text" name="address" placeholder="Address" required>
+      
+      <!-- Buttons to submit the changes  -->
+      <button type="submit">Save</button>
+      <button type="button" id="close-edit-modal">Cancel</button>
+    </form>
+  </div>
+</div>
+
+    <script src="app.js"></script>
+</body>
+</html>
