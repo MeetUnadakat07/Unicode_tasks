@@ -222,6 +222,7 @@ document.addEventListener("click", async (e) => {
   }
 })
 
+// Sort according to the cgpa 
 let sortAscending = true
 document.querySelector("#student-table th:nth-child(3)").addEventListener("click", () => {
   const tbody = document.getElementById("student-body")
