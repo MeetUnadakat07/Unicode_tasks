@@ -4,10 +4,17 @@ import Login from './components/login';
 import SignUp from './components/SignUp';
 
 function App() {
+  const [isLogin, setisLogin] = useState(false);
+
+  const toggleForm = () => setisLogin(!isLogin)
+
   return (
     <>
-      <Login />
-      <SignUp />
+      {isLogin ? (
+        <Login toggleForm={() => setisLogin(false)} />
+      ) : (
+        <SignUp toggleForm={() => setisLogin(true)} />
+      )}
     </>
   );
 }

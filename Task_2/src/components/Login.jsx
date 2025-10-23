@@ -1,17 +1,29 @@
 import React, { useState } from 'react'
 import "../App.css";
 
-const Login = () => {
-    const [email, setemail] = useState("")
-    const [password, setpassword] = useState("")
+const Login = ({toggleForm}) => {
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
+    
+    const [emailValid, setEmailValid] = useState(null)
+    const [passwordValid, setPasswordValid] = useState(null)
+
+    const emailRegex = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/;
+    const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*/?.-_+=]).{8,}$/;
 
     const handleEmailChange = (e) => {
-        setemail(e.target.value)
+        const value = e.target.value;
+        setEmail(value)
+        setEmailValid(emailRegex.test(value))
     }
 
-    const handlePassword = (e) => {
-        setpassword(e.target.value)
+    const handlePasswordChange = (e) => {
+        const value = e.target.value;
+        setPassword(value)
+        setPasswordValid(passwordRegex.test(value))
     }
+
     return (
     <>
         <div className=''>
@@ -22,12 +34,14 @@ const Login = () => {
                         <input 
                             type="text" 
                             placeholder='Email address' 
-                            className='w-84 h-8 border rounded-2xl p-4 my-3' 
+                            onChange={handleEmailChange}
+                            className={`w-84 h-8 border rounded-2xl p-4 my-3 ${emailValid === null ? "" : emailValid ? "border-green-500" : "border-red-500"}`}
                         />
                         <input 
                             type="password" 
                             placeholder='Password' 
-                            className='w-84 h-8 border rounded-2xl p-4 my-3' 
+                            onChange={handlePasswordChange}
+                            className= {`w-84 h-8 border rounded-2xl p-4 my-3 ${passwordValid === null ? "" : passwordValid ? "border-green-700" : "border-red-700"}`} 
                         />
                         <button className='bg-gradient-to-r from-violet-600 via-fuchsia-600 to-pink-500 h-12 w-42 text-white rounded-3xl hover:scale-105 font-bold text-xl'>
                             Login
@@ -37,7 +51,7 @@ const Login = () => {
                             <img src="https://static.vecteezy.com/system/resources/thumbnails/042/127/218/small_2x/round-circle-blue-facebook-logo-with-long-shadow-on-a-transparent-background-free-png.png" alt="facebook image" className='w-12' />
                             <img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" alt="facebook image" className='w-12' />
                         </div>
-                        <p>Don't have an account? <a href="" className='text-purple-700 font-bold'>Sign Up</a></p>
+                        <p>Don't have an account? <span onClick={toggleForm} className='text-purple-700 font-bold cursor-pointer'>Sign Up</span></p>
                     </div>
                 </div>
             </div>
