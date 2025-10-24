@@ -22,7 +22,7 @@ const Navbar = () => {
     <div className="sticky top-0 z-50 flex h-16 items-center justify-between bg-white px-8 shadow-sm">
       <div className="flex items-center space-x-2">
         <InstagramIcon fontSize="large" className="text-pink-500" />
-        <h1 className="text-xl font-semibold bg-gradient-to-r from-pink-500 via-red-500 to-orange-400 bg-clip-text text-transparent">
+        <h1 className="text-xl font-semibold bg-linear-to-r from-pink-500 via-red-500 to-orange-400 bg-clip-text text-transparent">
           InstaClone
         </h1>
       </div>

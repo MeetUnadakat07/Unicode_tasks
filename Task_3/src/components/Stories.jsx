@@ -8,7 +8,7 @@ const Stories = ({ stories }) => {
           <img
             src={story.image}
             alt={story.username}
-            className="h-16 w-16 rounded-full border-2 border-pink-500 p-[2px]"
+            className="h-16 w-16 rounded-full border-2 border-pink-500 p-0.5"
           />
           <span className="text-xs text-gray-600">{story.username}</span>
         </div>

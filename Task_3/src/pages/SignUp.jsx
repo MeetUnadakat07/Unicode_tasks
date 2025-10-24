@@ -81,7 +81,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="h-screen w-screen bg-gradient-to-r from-violet-600 via-fuchsia-600 to-pink-500 flex items-center justify-center">
+    <div className="h-screen w-screen bg-linear-to-r from-violet-600 via-fuchsia-600 to-pink-500 flex items-center justify-center">
       <div className="bg-white w-xl h-auto m-auto rounded-3xl p-8">
         <h1 className="font-bold text-2xl text-center mb-8">
           Create an account
@@ -147,7 +147,7 @@ const SignUp = () => {
 
           <button
             type="submit"
-            className="bg-gradient-to-r from-violet-600 via-fuchsia-600 to-pink-500 h-12 w-42 text-white rounded-3xl hover:scale-105 font-bold text-xl mt-2"
+            className="bg-linear-to-r from-violet-600 via-fuchsia-600 to-pink-500 h-12 w-42 text-white rounded-3xl hover:scale-105 font-bold text-xl mt-2"
           >
             Sign Up
           </button>
