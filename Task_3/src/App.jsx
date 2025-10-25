@@ -9,6 +9,7 @@ import ProfilePage from "./pages/ProfilePage";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import LandingPage from "./pages/LandingPage";
+import Notifications from "./pages/NotificationsPage";
 
 function App() {
   const location = useLocation();
@@ -24,6 +25,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/home" element={<HomePage />} />
+        <Route path="/notifications" element={<Notifications />} />
         <Route path="/discover" element={<DiscoverPage />} />
         <Route path="/create" element={<CreatePage />} />
         <Route path="/messages" element={<MessagesPage />} />
