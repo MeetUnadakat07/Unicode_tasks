@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Avatar, IconButton, TextField } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import SearchIcon from "@mui/icons-material/Search";
-import { messagesData } from "../data/data";
+import { messagesData } from "../data/messagesData";
 
 const MessagesPage = () => {
   const [selectedChat, setSelectedChat] = useState(messagesData[0]);

@@ -2,7 +2,9 @@ import React from "react";
 import Stories from "../components/Stories";
 import PostCard from "../components/PostCard";
 import SuggestedUsers from "../components/SuggestedUsers";
-import { storiesData, postsData, suggestedUsersData } from "../data/data";
+import { storiesData } from "../data/storiesData";
+import { postsData } from "../data/postsData";
+import { suggestedUsersData } from "../data/suggestedUsersData";
 
 const HomePage = () => {
   return (

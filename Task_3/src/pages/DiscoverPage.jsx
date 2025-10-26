@@ -3,11 +3,9 @@ import { Avatar, Chip } from "@mui/material";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
-import {
-  discoverCategories,
-  discoverUsersData,
-  trendingPostsData,
-} from "../data/data";
+import { discoverCategories } from "../data/discoverCategories";
+import { discoverUsersData } from "../data/discoverUsersData";
+import { trendingPostsData } from "../data/trendingPostsData";
 
 const DiscoverPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
