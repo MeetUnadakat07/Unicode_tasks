@@ -74,7 +74,7 @@ const ProfilePage = () => {
               </div>
             ) : (
               <p className="text-center text-gray-500 mt-8">
-                Np posts yet. Share your first photo!
+                No posts yet. Share your first photo!
               </p>
             )}
           </div>

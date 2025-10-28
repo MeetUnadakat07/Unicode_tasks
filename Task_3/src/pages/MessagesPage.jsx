@@ -42,7 +42,7 @@ const MessagesPage = () => {
               size="small"
               fullWidth
               value={searchQuery}
-              onChange={(e) => searchQuery(e.target.value)}
+              onChange={(e) => setSearchQuery(e.target.value)}
               inputProps={{
                 style: { borderRadius: "9999px", backgroundColor: "#f9fafb" },
               }}

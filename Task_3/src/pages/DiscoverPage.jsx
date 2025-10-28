@@ -16,11 +16,11 @@ const DiscoverPage = () => {
       : discoverUsersData.filter((user) => user.category === selectedCategory);
 
   const formatNumber = (num) => {
-    if (num >= 1_000_000)
-      return (num / 1_000_000).toFixed(1).replace(/\.0$/, "") + "M";
-    if (num >= 1_000) return (num / 1_000).toFixed(1).replace(/\.0$/, "") + "k";
+    if (num >= 1_000_000) return Number((num / 1_000_000).toFixed(1)) + "M";
+    if (num >= 1_000) return Number((num / 1_000).toFixed(1)) + "k";
     return num.toString();
   };
+
   return (
     <div className="min-h-screen bg-gray-50 flex justify-center py-8 px-4">
       <div className="w-full max-w-6xl space-y-8">
@@ -63,7 +63,7 @@ const DiscoverPage = () => {
                 <img
                   src={post.image}
                   alt="Trending"
-                  className="object-cover w-full h-48 group-hover:scale-105 transition-transform duration-300"
+                  className="object-cover w-full h-48 group-hover:scale-105 transition-transform duration-300 cursor-pointer"
                 />
                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center space-x-4 text-white">
                   <div className="flex items-center space-x-1">
