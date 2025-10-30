@@ -6,24 +6,12 @@ import { messagesData } from "../data/messagesData";
 
 const MessagesPage = () => {
   const [selectedChat, setSelectedChat] = useState(messagesData[0]);
-  const [newMessage, setNewMessage] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
-
-  const handleSend = () => {
-    if (!newMessage.trim()) return;
-
-    const updatedChat = {
-      ...selectedChat,
-      messages: [...selectedChat.messages, { from: "me", text: newMessage }],
-      lastMessage: newMessage,
-    };
-    setSelectedChat(updatedChat);
-    setNewMessage("");
-  };
 
   const filteredChat = messagesData.filter((chat) =>
     chat.user.fullName.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
   return (
     <div className="h-[90vh] bg-gray-50 flex justify-center py-6 px-4">
       <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-12 gap-6 bg-white rounded-xl shadow-md overflow-hidden">
@@ -37,14 +25,16 @@ const MessagesPage = () => {
           {/* search box */}
           <div className="p-3">
             <TextField
-              placeholder="Search messages...."
+              placeholder="Search messages..."
               variant="outlined"
               size="small"
               fullWidth
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              inputProps={{
-                style: { borderRadius: "9999px", backgroundColor: "#f9fafb" },
+              slotProps={{
+                input: {
+                  style: { borderRadius: "9999px", backgroundColor: "#f9fafb" },
+                },
               }}
             />
           </div>
@@ -77,7 +67,7 @@ const MessagesPage = () => {
         <div className="lg:col-span-8 flex flex-col">
           {selectedChat ? (
             <>
-              {/* chat header  */}
+              {/* chat header */}
               <div className="flex items-center space-x-3 p-4 border-b bg-gray-50">
                 <Avatar
                   src={selectedChat.user.avatar}
@@ -93,7 +83,7 @@ const MessagesPage = () => {
                 </div>
               </div>
 
-              {/* chat messages  */}
+              {/* chat messages */}
               <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-white">
                 {selectedChat.messages.map((msg, index) => (
                   <div
@@ -115,21 +105,25 @@ const MessagesPage = () => {
                 ))}
               </div>
 
-              {/* message input */}
+              {/* message input (non-functional) */}
               <div className="border-t bg-gray-50 flex items-center p-3">
                 <TextField
                   placeholder="Type a message..."
                   variant="outlined"
                   size="small"
                   fullWidth
-                  value={newMessage}
-                  onChange={(e) => e.key === "Enter" && handleSend()}
-                  InputProps={{
-                    style: { borderRadius: "9999px", backgroundColor: "#fff" },
+                  slotProps={{
+                    input: {
+                      style: {
+                        borderRadius: "9999px",
+                        backgroundColor: "#fff",
+                        opacity: 0.7,
+                      },
+                    },
                   }}
                 />
-                <IconButton color="primary" onClick={handleSend}>
-                  <SendIcon className="text-pink-500" />
+                <IconButton disabled>
+                  <SendIcon className="text-gray-400" />
                 </IconButton>
               </div>
             </>
