@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import DiscoverPage from "./pages/DiscoverPage";
@@ -11,7 +11,7 @@ import SignUp from "./pages/SignUp";
 import LandingPage from "./pages/LandingPage";
 import Notifications from "./pages/NotificationsPage";
 
-function App() {
+export default function App() {
   const location = useLocation();
 
   // Routes where navbar should be hidden
@@ -20,6 +20,7 @@ function App() {
   return (
     <>
       {!hideNavbarRoutes.includes(location.pathname) && <Navbar />}
+
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
@@ -32,14 +33,5 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
       </Routes>
     </>
-  );
-}
-
-// Wrap App in Router at the export level
-export default function AppWrapper() {
-  return (
-    <Router>
-      <App />
-    </Router>
   );
 }
