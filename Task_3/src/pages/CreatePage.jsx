@@ -36,7 +36,7 @@ const CreatePage = () => {
             <input
               type="text"
               placeholder="Tag people"
-              className="flex-grow border-none focus:ring-0 focus:outline-none text-gray-700 placeholder-gray-400"
+              className="grow border-none focus:ring-0 focus:outline-none text-gray-700 placeholder-gray-400"
             />
             <button className="text-pink-500 hover:text-pink-600 text-sm font-semibold ml-4">
               Add
@@ -47,7 +47,7 @@ const CreatePage = () => {
             <input
               type="text"
               placeholder="Add location"
-              className="flex-grow border-none focus:ring-0 focus:outline-none text-gray-700 placeholder-gray-400"
+              className="grow border-none focus:ring-0 focus:outline-none text-gray-700 placeholder-gray-400"
             />
             <button className="text-pink-500 hover:text-pink-600 text-sm font-semibold ml-4">
               Add
@@ -58,7 +58,7 @@ const CreatePage = () => {
             <input
               type="text"
               placeholder="Advanced settings"
-              className="flex-grow border-none focus:ring-0 focus:outline-none text-gray-700 placeholder-gray-400"
+              className="grow border-none focus:ring-0 focus:outline-none text-gray-700 placeholder-gray-400"
             />
             <button className="text-pink-500 hover:text-pink-600 text-sm font-semibold ml-4">
               View
