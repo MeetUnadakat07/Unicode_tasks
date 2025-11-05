@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 const CreatePage = () => {
   return (
@@ -21,7 +21,7 @@ const CreatePage = () => {
           />
         </div>
 
-        {/* Caption fiels  */}
+        {/* Caption field  */}
         <div className="mb-6">
           <textarea
             placeholder="Write a caption.."
@@ -30,24 +30,37 @@ const CreatePage = () => {
           />
         </div>
 
+        {/* Interactive input fields for tag, location, settings */}
         <div className="space-y-3 mb-6">
           <div className="flex items-center justify-between border-b pb-2">
-            <span className="text-gray-700">Tag people</span>
-            <button className="text-pink-500 hover:text-pink-600 text-sm font-semibold">
+            <input
+              type="text"
+              placeholder="Tag people"
+              className="flex-grow border-none focus:ring-0 focus:outline-none text-gray-700 placeholder-gray-400"
+            />
+            <button className="text-pink-500 hover:text-pink-600 text-sm font-semibold ml-4">
               Add
             </button>
           </div>
 
           <div className="flex items-center justify-between border-b pb-2">
-            <span className="text-gray-700">Add location</span>
-            <button className="text-pink-500 hover:text-pink-600 text-sm font-semibold">
+            <input
+              type="text"
+              placeholder="Add location"
+              className="flex-grow border-none focus:ring-0 focus:outline-none text-gray-700 placeholder-gray-400"
+            />
+            <button className="text-pink-500 hover:text-pink-600 text-sm font-semibold ml-4">
               Add
             </button>
           </div>
 
           <div className="flex items-center justify-between border-b pb-2">
-            <span className="text-gray-700">Advanced settings</span>
-            <button className="text-pink-500 hover:text-pink-600 text-sm font-semibold">
+            <input
+              type="text"
+              placeholder="Advanced settings"
+              className="flex-grow border-none focus:ring-0 focus:outline-none text-gray-700 placeholder-gray-400"
+            />
+            <button className="text-pink-500 hover:text-pink-600 text-sm font-semibold ml-4">
               View
             </button>
           </div>

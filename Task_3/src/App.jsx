@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import LandingPage from "./pages/LandingPage";
 import Notifications from "./pages/NotificationsPage";
+import PostPage from "./pages/PostPage";
 
 export default function App() {
   const location = useLocation();
@@ -31,6 +32,7 @@ export default function App() {
         <Route path="/create" element={<CreatePage />} />
         <Route path="/messages" element={<MessagesPage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/post/:id" element={<PostPage />} />
       </Routes>
     </>
   );

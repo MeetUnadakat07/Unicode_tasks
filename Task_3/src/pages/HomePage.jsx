@@ -17,7 +17,7 @@ const HomePage = () => {
             {/* Posts  */}
             <div className="space-y-6">
               {postsData.map((item) => (
-                <PostCard key={item.id} user={item.user} post={item.post} />
+                <PostCard key={item.id} id={item.id} user={item.user} post={item.post} />
               ))}
             </div>
           </div>

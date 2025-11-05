@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+import { useNavigate } from "react-router-dom";
 
-const PostCard = ({ user, post }) => {
+const PostCard = ({ id, user, post }) => {
   const [liked, setLiked] = useState(post.isLiked);
+  const navigate = useNavigate()
+
+  const handleOpenPost = () => {
+    navigate(`/post/${id}`)
+  }
 
   return (
     <div className="rounded-lg bg-white shadow-sm border border-gray-200">
@@ -17,7 +23,7 @@ const PostCard = ({ user, post }) => {
       </div>
 
       {/* Post Image */}
-      <img src={post.image} alt="Post" className="w-full object-cover" />
+      <img src={post.image} alt="Post" className="w-full object-cover" onClick={handleOpenPost} />
 
       {/* Footer */}
       <div className="p-4">
