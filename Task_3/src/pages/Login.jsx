@@ -1,13 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "../App.css";
 import { Link, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
+import { loginUser, getCurrentUser } from "../api/authApi";
+import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [apiError, setApiError] = useState("")
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
   const navigate = useNavigate();
+  const setUser = useContext(AuthContext)
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const passwordRegex =
@@ -35,10 +42,37 @@ const Login = () => {
     }
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     if (emailError || passwordError || !email || !password) return;
-    navigate("/home");
+    try {
+      setIsSubmitting(true);
+      setApiError("");
+
+      const res = await loginUser({email, password});
+      console.log("Login reaponse: ", res);
+
+      const token = res.data.token || res.data.jwt || res.data.accessToken || res.data?.data?.token;
+
+      if(!token) {
+        throw new Error("Token not found in login response.")
+      }
+
+      Cookies.set("token", token, {
+        expires: 7, 
+        sameSite: "lax",
+      })
+
+      const meRes = await getCurrentUser();
+      setUser(meRes.data);
+
+      navigate("/home")
+    } catch(err) {
+      console.error("Login error", err);
+      setApiError(err?.response?.data?.message || err?.message || "Login failed. Please check your email and password.")
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -75,6 +109,10 @@ const Login = () => {
               <p className="text-red-500 text-sm mt-1">{passwordError}</p>
             )}
           </div>
+
+          {apiError && (
+            <p className="text-red-500 text-sm mt-2 text-center">{apiError}</p>
+          )}
 
           <button
             type="submit"
