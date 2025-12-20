@@ -10,11 +10,13 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [apiError, setApiError] = useState("")
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [apiError, setApiError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const navigate = useNavigate();
-  const setUser = useContext(AuthContext)
+
+  // ✅ FIXED LINE
+  const { setUser } = useContext(AuthContext);
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const passwordRegex =
@@ -45,38 +47,41 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     if (emailError || passwordError || !email || !password) return;
+
     try {
       setIsSubmitting(true);
       setApiError("");
 
-      const res = await loginUser({email, password});
-      console.log("Login reaponse: ", res);
+      const res = await loginUser({ email, password });
+      console.log("LOGIN res.data EXACT:", JSON.stringify(res.data, null, 2));
 
-      const token = res.data.token || res.data.jwt || res.data.accessToken || res.data?.data?.token;
-
-      if(!token) {
-        throw new Error("Token not found in login response.")
-      }
+      const token = res.data.token;
+      if (!token) throw new Error("Token not found in login response");
 
       Cookies.set("token", token, {
-        expires: 7, 
+        expires: 7,
         sameSite: "lax",
-      })
+      });
 
-      const meRes = await getCurrentUser();
-      setUser(meRes.data);
+      setUser(res.data.user);
 
-      navigate("/home")
-    } catch(err) {
+      // await getCurrentUser();
+
+      navigate("/home");
+    } catch (err) {
       console.error("Login error", err);
-      setApiError(err?.response?.data?.message || err?.message || "Login failed. Please check your email and password.")
+      setApiError(
+        err?.response?.data?.message ||
+          err?.message ||
+          "Login failed. Please check your email and password."
+      );
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="h-screen w-screen bg-linear-to-r from-violet-600 via-fuchsia-600 to-pink-500 flex items-center justify-center">
+    <div className="min-h-screen w-screen bg-linear-to-r from-violet-600 via-fuchsia-600 to-pink-500 flex items-center justify-center">
       <div className="bg-white w-xl h-auto max-h-96 m-auto rounded-3xl p-8">
         <h1 className="font-bold text-2xl text-center mb-8">Welcome Back 👋</h1>
 
@@ -124,10 +129,7 @@ const Login = () => {
 
         <p className="text-center mt-4">
           Don't have an account?{" "}
-          <Link
-            to="/signup"
-            className="text-purple-700 font-bold cursor-pointer"
-          >
+          <Link to="/signup" className="text-purple-700 font-bold cursor-pointer">
             Sign Up
           </Link>
         </p>
