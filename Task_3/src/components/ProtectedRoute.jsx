@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 const ProtectedRoute = ({ children }) => {
-  // ✅ Object destructuring (matches AuthContext value)
+  //  Object destructuring (matches AuthContext value)
   const { user, loading } = useContext(AuthContext);
 
   if (loading) {
