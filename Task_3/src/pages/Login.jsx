@@ -15,7 +15,6 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  // ✅ FIXED LINE
   const { setUser } = useContext(AuthContext);
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -121,15 +120,21 @@ const Login = () => {
 
           <button
             type="submit"
-            className="bg-linear-to-r from-violet-600 via-fuchsia-600 to-pink-500 h-12 w-42 text-white rounded-3xl hover:scale-105 font-bold text-xl mt-2"
+            disabled={isSubmitting}
+            className={`bg-linear-to-r from-violet-600 via-fuchsia-600 to-pink-500 h-12 w-42 text-white rounded-3xl font-bold text-xl mt-2 transition ${
+              isSubmitting ? "opacity-60 cursor-not-allowed" : "hover:scale-105"
+            } `}
           >
-            Login
+            {isSubmitting ? "Logging in" : "Login"}
           </button>
         </form>
 
         <p className="text-center mt-4">
           Don't have an account?{" "}
-          <Link to="/signup" className="text-purple-700 font-bold cursor-pointer">
+          <Link
+            to="/signup"
+            className="text-purple-700 font-bold cursor-pointer"
+          >
             Sign Up
           </Link>
         </p>

@@ -1,7 +1,6 @@
 import React, { createContext, useState } from "react";
 import Cookies from "js-cookie";
 
-// ✅ Named export (required)
 export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
