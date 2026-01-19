@@ -5,7 +5,7 @@ const axiosClient = axios.create({
   baseURL: "https://task4-authdb.onrender.com/auth",
 });
 
-// Request interceptor (attach token)
+// Attach token to every request
 axiosClient.interceptors.request.use(
   (config) => {
     const token = Cookies.get("token");
@@ -17,7 +17,7 @@ axiosClient.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Response interceptor (handle auth errors)
+// Handle expired / invalid token
 axiosClient.interceptors.response.use(
   (response) => response,
   (error) => {
