@@ -16,76 +16,85 @@ import ProtectedRoute from "./components/ProtectedRoute";
 export default function App() {
   const location = useLocation();
 
-  // Routes where navbar should be hidden
   const hideNavbarRoutes = ["/", "/login", "/signup"];
+  const showNavbar = !hideNavbarRoutes.includes(location.pathname);
 
   return (
-    <>
-      {!hideNavbarRoutes.includes(location.pathname) && <Navbar />}
+    <div className="min-h-screen">
+      {showNavbar ? (
+        /* APP LAYOUT (Sidebar + Content) */
+        <div className="flex">
+          <Navbar />
 
-      <Routes>
-        {/* Public Routes  */}
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        {/* Protected Routes  */}
-        <Route
-          path="/home"
-          element={
-            <ProtectedRoute>
-              <HomePage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/notifications"
-          element={
-            <ProtectedRoute>
-              <Notifications />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/discover"
-          element={
-            <ProtectedRoute>
-              <DiscoverPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/create"
-          element={
-            <ProtectedRoute>
-              <CreatePage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/messages"
-          element={
-            <ProtectedRoute>
-              <MessagesPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <ProtectedRoute>
-              <ProfilePage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/post/:id"
-          element={
-            <ProtectedRoute>
-              <PostPage />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
-    </>
+          <main className="ml-64 flex-1 bg-gray-50 min-h-screen">
+            <Routes>
+              <Route
+                path="/home"
+                element={
+                  <ProtectedRoute>
+                    <HomePage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/discover"
+                element={
+                  <ProtectedRoute>
+                    <DiscoverPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/create"
+                element={
+                  <ProtectedRoute>
+                    <CreatePage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/notifications"
+                element={
+                  <ProtectedRoute>
+                    <Notifications />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/messages"
+                element={
+                  <ProtectedRoute>
+                    <MessagesPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    <ProfilePage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/post/:id"
+                element={
+                  <ProtectedRoute>
+                    <PostPage />
+                  </ProtectedRoute>
+                }
+              />
+            </Routes>
+          </main>
+        </div>
+      ) : (
+        /* PUBLIC ROUTES (No Navbar) */
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+        </Routes>
+      )}
+    </div>
   );
 }

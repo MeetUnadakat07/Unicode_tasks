@@ -7,14 +7,14 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="max-w-xl mx-auto py-6 space-y-6">
+    <div className="max-w-4xl py-6 space-y-6 md:ml-40 mx-auto pb-16 md:pb-0">
 
       {/* STORIES */}
       <div className="flex gap-4 overflow-x-auto px-2 pb-2 scrollbar-hide">
         {storiesData.map((story) => (
           <div
             key={story.id}
-            className="flex flex-col items-center cursor-pointer min-w-16"
+            className="flex flex-col items-center cursor-pointer min-w-[72px]"
           >
             <div className="h-16 w-16 rounded-full p-0.5 bg-linear-to-tr from-pink-500 to-yellow-400">
               <img
@@ -34,7 +34,7 @@ const HomePage = () => {
       {posts.map((post) => (
         <div
           key={post.id}
-          className="bg-white rounded-lg shadow"
+          className="bg-white rounded-lg shadow-sm border"
         >
           {/* POST HEADER */}
           <div className="flex items-center p-3">
@@ -43,18 +43,22 @@ const HomePage = () => {
               alt={post.user.username}
               className="h-8 w-8 rounded-full"
             />
-            <span className="ml-3 font-semibold">
+            <span className="ml-3 font-semibold text-sm">
               {post.user.username}
             </span>
           </div>
 
           {/* POST IMAGE */}
-          <img
-            src={post.image}
-            alt="Post"
-            className="w-full cursor-pointer"
+          <div
+            className="cursor-pointer"
             onClick={() => navigate(`/post/${post.id}`)}
-          />
+          >
+            <img
+              src={post.image}
+              alt="Post"
+              className="w-full aspect-auto object-cover"
+            />
+          </div>
 
           {/* POST CAPTION */}
           <div className="p-3 text-sm">
