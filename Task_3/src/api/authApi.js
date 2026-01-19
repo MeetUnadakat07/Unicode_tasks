@@ -1,6 +1,13 @@
-import api from "./axiosClient";
+import axiosClient from "./axiosClient";
 
-export const registerUser = (data) => api.post("/register", data);
-export const loginUser = (data) => api.post("/login", data);
-export const getCurrentUser = () => api.get("/me");
-export const getAllUsers = () => api.get("/all");
+export const registerUser = (data) =>
+  axiosClient.post("/register", data);
+
+export const loginUser = (data) =>
+  axiosClient.post("/login", data);
+
+export const getCurrentUser = () =>
+  axiosClient.get("/me");
+
+export const getAllUsers = () =>
+  axiosClient.get("/all");

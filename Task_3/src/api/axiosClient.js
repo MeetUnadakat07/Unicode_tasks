@@ -1,11 +1,12 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const api = axios.create({
+const axiosClient = axios.create({
   baseURL: "https://task4-authdb.onrender.com/auth",
 });
 
-api.interceptors.request.use(
+// Request interceptor (attach token)
+axiosClient.interceptors.request.use(
   (config) => {
     const token = Cookies.get("token");
     if (token) {
@@ -16,4 +17,16 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-export default api;
+// Response interceptor (handle auth errors)
+axiosClient.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      Cookies.remove("token");
+      window.location.href = "/login";
+    }
+    return Promise.reject(error);
+  }
+);
+
+export default axiosClient;
