@@ -2,9 +2,15 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { storiesData } from "../data/storiesData";
 import { posts } from "../data/posts";
+import { profileData } from "../data/profileData";
 
 const HomePage = () => {
   const navigate = useNavigate();
+
+  // 🔥 EXCLUDE PROFILE OWNER POSTS
+  const feedPosts = posts.filter(
+    (post) => post.user.username !== profileData.username
+  );
 
   return (
     <div className="max-w-4xl py-6 space-y-6 md:ml-40 mx-auto pb-16 md:pb-0">
@@ -12,14 +18,10 @@ const HomePage = () => {
       {/* STORIES */}
       <div className="flex gap-4 overflow-x-auto px-2 pb-2 scrollbar-hide">
         {storiesData.map((story) => (
-          <div
-            key={story.id}
-            className="flex flex-col items-center cursor-pointer min-w-[72px]"
-          >
+          <div key={story.id} className="flex flex-col items-center min-w-[72px]">
             <div className="h-16 w-16 rounded-full p-0.5 bg-linear-to-tr from-pink-500 to-yellow-400">
               <img
                 src={story.image}
-                alt={story.username}
                 className="h-full w-full rounded-full object-cover border-2 border-white"
               />
             </div>
@@ -30,37 +32,20 @@ const HomePage = () => {
         ))}
       </div>
 
-      {/* POSTS */}
-      {posts.map((post) => (
-        <div
-          key={post.id}
-          className="bg-white rounded-lg shadow-sm border"
-        >
-          {/* POST HEADER */}
+      {/* POSTS FEED */}
+      {feedPosts.map((post) => (
+        <div key={post.id} className="bg-white rounded-lg shadow-sm border">
           <div className="flex items-center p-3">
-            <img
-              src={post.user.avatar}
-              alt={post.user.username}
-              className="h-8 w-8 rounded-full"
-            />
+            <img src={post.user.avatar} className="h-8 w-8 rounded-full" />
             <span className="ml-3 font-semibold text-sm">
               {post.user.username}
             </span>
           </div>
 
-          {/* POST IMAGE */}
-          <div
-            className="cursor-pointer"
-            onClick={() => navigate(`/post/${post.id}`)}
-          >
-            <img
-              src={post.image}
-              alt="Post"
-              className="w-full aspect-auto object-cover"
-            />
+          <div onClick={() => navigate(`/post/${post.id}`)} className="cursor-pointer">
+            <img src={post.image} className="w-full object-cover" />
           </div>
 
-          {/* POST CAPTION */}
           <div className="p-3 text-sm">
             <span className="font-semibold mr-1">
               {post.user.username}

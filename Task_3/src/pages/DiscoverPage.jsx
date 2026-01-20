@@ -14,9 +14,11 @@ const DiscoverPage = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // 🔥 NEW: follow state
+  const [followedUsers, setFollowedUsers] = useState(new Set());
+
   const navigate = useNavigate();
 
-  // Fetch users from backend
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -32,7 +34,14 @@ const DiscoverPage = () => {
     fetchUsers();
   }, []);
 
-  // Trending posts (mock)
+  const toggleFollow = (userId) => {
+    setFollowedUsers((prev) => {
+      const updated = new Set(prev);
+      updated.has(userId) ? updated.delete(userId) : updated.add(userId);
+      return updated;
+    });
+  };
+
   const trendingPosts = posts
     .slice()
     .sort((a, b) => b.likes - a.likes)
@@ -117,39 +126,52 @@ const DiscoverPage = () => {
           </div>
         </div>
 
-        {/* CREATORS FROM API */}
+        {/* PEOPLE */}
         <div>
           <h2 className="text-xl font-semibold text-gray-700 mb-4">
             People you may know
           </h2>
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-            {users.map((user) => (
-              <div
-                key={user._id}
-                className="bg-white p-4 rounded-lg border shadow-sm flex flex-col items-center text-center"
-              >
-                <Avatar
-                  sx={{ width: 72, height: 72 }}
-                  src={`https://ui-avatars.com/api/?name=${user.name}`}
-                />
+            {users.map((user) => {
+              const isFollowing = followedUsers.has(user._id);
 
-                <p className="font-semibold mt-3 flex items-center gap-1">
-                  {user.name}
-                  <VerifiedIcon fontSize="small" className="text-blue-500" />
-                </p>
+              return (
+                <div
+                  key={user._id}
+                  className="bg-white p-4 rounded-lg border shadow-sm flex flex-col items-center text-center"
+                >
+                  <Avatar
+                    sx={{ width: 72, height: 72 }}
+                    src={`https://ui-avatars.com/api/?name=${user.name}`}
+                  />
 
-                <p className="text-sm text-gray-500">{user.city || "Unknown"}</p>
+                  <p className="font-semibold mt-3 flex items-center gap-1">
+                    {user.name}
+                    <VerifiedIcon fontSize="small" className="text-blue-500" />
+                  </p>
 
-                <p className="text-xs text-gray-400 mt-1">
-                  {user.bio || "No bio available"}
-                </p>
+                  <p className="text-sm text-gray-500">
+                    {user.city || "Unknown"}
+                  </p>
 
-                <button className="mt-4 px-5 py-2 rounded-full bg-linear-to-r from-pink-500 to-orange-400 text-white text-sm font-semibold hover:scale-105 transition">
-                  Follow
-                </button>
-              </div>
-            ))}
+                  <p className="text-xs text-gray-400 mt-1">
+                    {user.bio || "No bio available"}
+                  </p>
+
+                  <button
+                    onClick={() => toggleFollow(user._id)}
+                    className={`mt-4 px-5 py-2 rounded-full text-sm font-semibold transition ${
+                      isFollowing
+                        ? "bg-gray-200 text-gray-800 hover:bg-gray-300"
+                        : "bg-linear-to-r from-pink-500 to-orange-400 text-white hover:scale-105"
+                    }`}
+                  >
+                    {isFollowing ? "Following" : "Follow"}
+                  </button>
+                </div>
+              );
+            })}
           </div>
         </div>
 
